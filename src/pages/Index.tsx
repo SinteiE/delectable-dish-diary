@@ -1,6 +1,15 @@
-
 import { motion } from "framer-motion";
-import { ChefHat, ArrowRight } from "lucide-react";
+import { ChefHat, ArrowRight, Coffee, Sandwich, CookingPot, CakeSlice, GlassWater, Star, ThumbsUp } from "lucide-react";
+
+const categories = [
+  { icon: Coffee, name: "Breakfast", color: "bg-orange-100 text-orange-600" },
+  { icon: Sandwich, name: "Lunch", color: "bg-yellow-100 text-yellow-600" },
+  { icon: CookingPot, name: "Dinner", color: "bg-primary-50 text-primary-600" },
+  { icon: CakeSlice, name: "Desserts", color: "bg-pink-100 text-pink-600" },
+  { icon: GlassWater, name: "Drinks", color: "bg-blue-100 text-blue-600" },
+  { icon: Star, name: "Reviews", color: "bg-purple-100 text-purple-600" },
+  { icon: ThumbsUp, name: "Tips", color: "bg-indigo-100 text-indigo-600" }
+];
 
 const Index = () => {
   return (
@@ -54,8 +63,36 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Recipes */}
-      <section className="py-20 bg-gray-50" id="recipes">
+      {/* Categories */}
+      <section className="py-16 bg-gradient-to-b from-white to-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="font-inter text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Explore Categories
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Discover recipes for every occasion and craving
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+            {categories.map((category) => (
+              <motion.a
+                key={category.name}
+                href={`#${category.name.toLowerCase()}`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`${category.color} rounded-xl p-4 text-center transition-shadow hover:shadow-md`}
+              >
+                <category.icon className="mx-auto mb-3 h-8 w-8" />
+                <span className="font-medium">{category.name}</span>
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Recipes with More Vibrant Design */}
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-white" id="recipes">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="font-inter text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -66,26 +103,90 @@ const Index = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
+            {[
+              {
+                category: "Breakfast",
+                title: "Perfect Morning Pancakes",
+                description: "Fluffy, golden pancakes topped with maple syrup and fresh berries.",
+                icon: Coffee,
+                color: "text-orange-500"
+              },
+              {
+                category: "Lunch",
+                title: "Mediterranean Quinoa Bowl",
+                description: "Fresh and healthy bowl packed with proteins and vegetables.",
+                icon: Sandwich,
+                color: "text-yellow-500"
+              },
+              {
+                category: "Dinner",
+                title: "Herb-Crusted Salmon",
+                description: "Perfectly baked salmon with a crispy herb crust.",
+                icon: CookingPot,
+                color: "text-primary-500"
+              }
+            ].map((recipe, index) => (
               <motion.div
-                key={item}
+                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: item * 0.1 }}
-                className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all"
               >
-                <div className="aspect-[4/3] bg-gray-100"></div>
+                <div className="aspect-[4/3] bg-gray-100 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-gray-900/20 to-gray-900/0" />
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="w-full h-full bg-gray-200 transition-transform group-hover:scale-105"
+                  />
+                </div>
                 <div className="p-6">
-                  <span className="text-primary-500 text-sm font-medium">Main Course</span>
-                  <h3 className="font-inter text-xl font-semibold mt-2 mb-3">Delicious Recipe Title</h3>
+                  <div className="flex items-center gap-2 mb-3">
+                    <recipe.icon className={`h-4 w-4 ${recipe.color}`} />
+                    <span className={`text-sm font-medium ${recipe.color}`}>{recipe.category}</span>
+                  </div>
+                  <h3 className="font-inter text-xl font-semibold mb-3">{recipe.title}</h3>
                   <p className="text-gray-600 text-sm mb-4">
-                    A brief description of this amazing recipe that will make your mouth water.
+                    {recipe.description}
                   </p>
                   <a href="#" className="inline-flex items-center text-primary-500 font-medium hover:text-primary-600">
-                    Read More
+                    View Recipe
                     <ArrowRight size={16} className="ml-2" />
                   </a>
                 </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tips & Tricks Section */}
+      <section className="py-16 bg-gradient-to-r from-primary-50 to-primary-100">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="font-inter text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Tips & Tricks
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Master the art of cooking with our expert tips
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              "Perfect your knife skills",
+              "Master temperature control",
+              "Elevate your plating game"
+            ].map((tip, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.02 }}
+                className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-all"
+              >
+                <ThumbsUp className="h-8 w-8 text-primary-500 mb-4" />
+                <h3 className="font-inter text-lg font-semibold mb-2">{tip}</h3>
+                <p className="text-gray-600">
+                  Learn professional techniques to enhance your cooking skills.
+                </p>
               </motion.div>
             ))}
           </div>
