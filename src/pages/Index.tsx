@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { ChefHat, ArrowRight, Coffee, Sandwich, CookingPot, CakeSlice, GlassWater, Star, ThumbsUp } from "lucide-react";
 
@@ -145,7 +146,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Recipes with Reviews and Ingredients */}
+      {/* Featured Recipes */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white" id="recipes">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
