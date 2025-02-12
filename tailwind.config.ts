@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -24,18 +23,25 @@ export default {
         inter: ['Inter', 'sans-serif'],
       },
       colors: {
+        theme: {
+          red: '#D10134',
+          bright: '#FD423F',
+          orange: '#FE8000',
+          yellow: '#FFB701',
+          green: '#67AD00',
+        },
         primary: {
-          DEFAULT: '#4ADE80',
-          50: '#EBFDF0',
-          100: '#D1F9DD',
-          200: '#9FF1B6',
-          300: '#6DE98F',
-          400: '#4ADE80',
-          500: '#22C55E',
-          600: '#1B9D4B',
-          700: '#147538',
-          800: '#0E4C25',
-          900: '#072412',
+          DEFAULT: '#67AD00',
+          50: '#F2F7EB',
+          100: '#E5F0D6',
+          200: '#CCE1AE',
+          300: '#B2D285',
+          400: '#99C35D',
+          500: '#67AD00',
+          600: '#528A00',
+          700: '#3E6800',
+          800: '#2A4500',
+          900: '#152300',
         },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

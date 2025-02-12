@@ -2,13 +2,67 @@ import { motion } from "framer-motion";
 import { ChefHat, ArrowRight, Coffee, Sandwich, CookingPot, CakeSlice, GlassWater, Star, ThumbsUp } from "lucide-react";
 
 const categories = [
-  { icon: Coffee, name: "Breakfast", color: "bg-orange-100 text-orange-600" },
-  { icon: Sandwich, name: "Lunch", color: "bg-yellow-100 text-yellow-600" },
-  { icon: CookingPot, name: "Dinner", color: "bg-primary-50 text-primary-600" },
-  { icon: CakeSlice, name: "Desserts", color: "bg-pink-100 text-pink-600" },
-  { icon: GlassWater, name: "Drinks", color: "bg-blue-100 text-blue-600" },
-  { icon: Star, name: "Reviews", color: "bg-purple-100 text-purple-600" },
-  { icon: ThumbsUp, name: "Tips", color: "bg-indigo-100 text-indigo-600" }
+  { icon: Coffee, name: "Breakfast", color: "bg-theme-orange/10 text-theme-orange" },
+  { icon: Sandwich, name: "Lunch", color: "bg-theme-yellow/10 text-theme-yellow" },
+  { icon: CookingPot, name: "Dinner", color: "bg-theme-green/10 text-theme-green" },
+  { icon: CakeSlice, name: "Desserts", color: "bg-theme-bright/10 text-theme-bright" },
+  { icon: GlassWater, name: "Drinks", color: "bg-theme-red/10 text-theme-red" },
+  { icon: Star, name: "Reviews", color: "bg-theme-orange/10 text-theme-orange" },
+  { icon: ThumbsUp, name: "Tips", color: "bg-theme-green/10 text-theme-green" }
+];
+
+const recipes = [
+  {
+    category: "Breakfast",
+    title: "Perfect Morning Pancakes",
+    description: "Fluffy, golden pancakes topped with maple syrup and fresh berries.",
+    icon: Coffee,
+    color: "text-theme-orange",
+    ingredients: [
+      { name: "All-purpose flour", amount: "1½ cups" },
+      { name: "Fresh milk", amount: "1¼ cups" },
+      { name: "Eggs", amount: "2 large" },
+      { name: "Butter", amount: "3 tbsp" },
+    ],
+    reviews: [
+      { author: "Sarah M.", rating: 5, comment: "Best pancakes ever! So fluffy!" },
+      { author: "John D.", rating: 4, comment: "Great recipe, very easy to follow." }
+    ]
+  },
+  {
+    category: "Lunch",
+    title: "Mediterranean Quinoa Bowl",
+    description: "Fresh and healthy bowl packed with proteins and vegetables.",
+    icon: Sandwich,
+    color: "text-theme-yellow",
+    ingredients: [
+      { name: "Quinoa", amount: "1 cup" },
+      { name: "Cherry tomatoes", amount: "1 cup" },
+      { name: "Cucumber", amount: "1 medium" },
+      { name: "Feta cheese", amount: "½ cup" },
+    ],
+    reviews: [
+      { author: "Maria G.", rating: 5, comment: "So fresh and healthy!" },
+      { author: "Alex P.", rating: 5, comment: "Perfect summer lunch!" }
+    ]
+  },
+  {
+    category: "Dinner",
+    title: "Herb-Crusted Salmon",
+    description: "Perfectly baked salmon with a crispy herb crust.",
+    icon: CookingPot,
+    color: "text-theme-green",
+    ingredients: [
+      { name: "Salmon fillet", amount: "6 oz" },
+      { name: "Fresh herbs", amount: "¼ cup" },
+      { name: "Breadcrumbs", amount: "½ cup" },
+      { name: "Olive oil", amount: "2 tbsp" },
+    ],
+    reviews: [
+      { author: "Michael R.", rating: 5, comment: "Restaurant quality at home!" },
+      { author: "Emma S.", rating: 4, comment: "Delicious and easy to make." }
+    ]
+  }
 ];
 
 const Index = () => {
@@ -91,7 +145,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Recipes with More Vibrant Design */}
+      {/* Featured Recipes with Reviews and Ingredients */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white" id="recipes">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -103,29 +157,7 @@ const Index = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                category: "Breakfast",
-                title: "Perfect Morning Pancakes",
-                description: "Fluffy, golden pancakes topped with maple syrup and fresh berries.",
-                icon: Coffee,
-                color: "text-orange-500"
-              },
-              {
-                category: "Lunch",
-                title: "Mediterranean Quinoa Bowl",
-                description: "Fresh and healthy bowl packed with proteins and vegetables.",
-                icon: Sandwich,
-                color: "text-yellow-500"
-              },
-              {
-                category: "Dinner",
-                title: "Herb-Crusted Salmon",
-                description: "Perfectly baked salmon with a crispy herb crust.",
-                icon: CookingPot,
-                color: "text-primary-500"
-              }
-            ].map((recipe, index) => (
+            {recipes.map((recipe, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -149,10 +181,52 @@ const Index = () => {
                   <p className="text-gray-600 text-sm mb-4">
                     {recipe.description}
                   </p>
-                  <a href="#" className="inline-flex items-center text-primary-500 font-medium hover:text-primary-600">
-                    View Recipe
-                    <ArrowRight size={16} className="ml-2" />
-                  </a>
+                  
+                  {/* Ingredients Section */}
+                  <div className="mb-6">
+                    <h4 className="font-inter text-lg font-semibold mb-3 text-theme-green">Ingredients</h4>
+                    <div className="grid grid-cols-2 gap-2">
+                      {recipe.ingredients.map((ingredient, idx) => (
+                        <div 
+                          key={idx}
+                          className="bg-theme-green/5 rounded-lg p-2 text-sm"
+                        >
+                          <p className="font-medium text-theme-green">{ingredient.name}</p>
+                          <p className="text-gray-600">{ingredient.amount}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Reviews Section */}
+                  <div className="border-t pt-4 mt-4">
+                    <h4 className="font-inter text-lg font-semibold mb-3 text-theme-orange">Reviews</h4>
+                    <div className="space-y-3">
+                      {recipe.reviews.map((review, idx) => (
+                        <div key={idx} className="bg-theme-orange/5 rounded-lg p-3">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-medium text-theme-orange">{review.author}</span>
+                            <div className="flex items-center">
+                              {[...Array(review.rating)].map((_, i) => (
+                                <Star 
+                                  key={i}
+                                  className="w-4 h-4 fill-theme-yellow text-theme-yellow"
+                                />
+                              ))}
+                            </div>
+                          </div>
+                          <p className="text-sm text-gray-600">{review.comment}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <a href="#" className="inline-flex items-center text-theme-green font-medium hover:text-theme-green/80">
+                      View Full Recipe
+                      <ArrowRight size={16} className="ml-2" />
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             ))}
